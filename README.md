@@ -2,52 +2,6 @@
 
 基于 **Python + Flask + pywebview** 的 Wallpaper Engine 创意工坊内容提取工具。支持四种项目类型的批量提取、输出目录管理、桌面窗口化运行。
 
-## 功能特性
-
-- **批量提取** — 多选/全选项目，一键提取或复制
-- **双视图面板** — 输入目录（提取）+ 输出目录（删除管理）
-- **智能类型识别** — 自动区分 `scene` / `video` / `web` / `application`，scene 类型调用 RePKG 解包，其余直接复制
-- **搜索与筛选** — 按名称搜索，按类型筛选
-- **右键菜单** — 单个项目快速操作（提取/删除/打开位置）
-- **Steam 路径检测** — 自动识别 Steam 安装位置及 Wallpaper Engine 目录
-- **桌面窗口模式** — 基于 pywebview 的原生窗口体验
-- **自定义外观** — 背景图片库、透明度与模糊调节
-- **进度与日志** — 实时提取进度、流式日志输出
-
-## 技术栈
-
-| 层级 | 技术 |
-|------|------|
-| 后端 | Python 3.10+ / Flask 3.x |
-| 前端 | Alpine.js / Tailwind CSS |
-| 桌面 | pywebview |
-| 打包 | PyInstaller / Inno Setup 6 |
-
-## 快速开始
-
-### 环境要求
-
-- Windows 10/11 64 位
-- Python ≥ 3.10
-
-### 安装依赖
-
-```bash
-pip install -r requirements.txt
-```
-
-### 启动应用
-
-```bash
-# Web 模式（浏览器访问）
-python app.py
-
-# 桌面窗口模式
-python app.py --gui
-```
-
-访问 `http://127.0.0.1:5000`
-
 ## 使用指南
 
 ### 1. 路径配置
@@ -55,8 +9,9 @@ python app.py --gui
 首次使用需配置输入/输出路径：
 
 1. 打开 **设置** 页面
-2. 点击 **自动检测 Steam 路径**，程序将自动识别 Wallpaper Engine 的创意工坊目录和我的项目目录
-3. 也可手动填写路径
+   
+3. 点击 **自动检测 Steam 路径**，程序将自动识别 Wallpaper Engine 的创意工坊目录和我的项目目录
+4. 也可手动填写路径
 
 | 路径 | 说明 | 典型位置 |
 |------|------|----------|
@@ -115,6 +70,14 @@ python app.py --gui
 | 递归搜索子目录 | 扫描时递归遍历所有子文件夹 |
 | 复制预览图像 | 将项目预览图复制到输出目录 |
 
+### 8.提取后的文件
+
+若使用了Steam路径检测的结果作为输出路径，则打开WallpaperEngine，在筛选的来源中选择：“我的壁纸”，即可查看到转换后的项目。
+
+（通常一个壁纸是由多个图层和特效组合而成的，因此转换后的结果并不会是一个独立的图片PNG类或视频MP4类文件，当然，相关的结果都可以在项目文件夹内去查找）
+
+转换后的项目是支持通过WallpaperEngine的“在编辑器中打开”进行相关的用户配置、图像、特效修改的。
+
 ## 项目结构
 
 ```
@@ -152,10 +115,7 @@ RePKG-GUI/
 ## 致谢
 
 - [RePKG](https://github.com/notscuffed/RePKG) — Wallpaper Engine `.pkg` 解包工具
-- [pywebview](https://pywebview.flowrl.com/) — Python 桌面窗口框架
-- [Flask](https://flask.palletsprojects.com/) — Web 框架
-- [Alpine.js](https://alpinejs.dev/) — 轻量级响应式前端框架
-- [Tailwind CSS](https://tailwindcss.com/) — CSS 工具集
+
 
 ## 许可证
 
