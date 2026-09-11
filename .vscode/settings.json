@@ -1,0 +1,14 @@
+{
+  "dotnet.defaultSolution": "RePKG-Workbench.sln",
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/artifacts": true
+  },
+  "search.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/artifacts": true,
+    "**/TestResults": true
+  }
+}

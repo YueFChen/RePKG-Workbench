@@ -1,122 +1,106 @@
-# RePKG-GUI
+# RePKG Workbench
 
-基于 **Python + Flask + pywebview** 的 Wallpaper Engine 创意工坊内容提取工具。支持四种项目类型的批量提取、输出目录管理、桌面窗口化运行。
+[简体中文](README.zh-CN.md) | English
 
-## 使用指南
+RePKG Workbench is a Windows desktop application that provides a native WPF interface for RePKG, allowing users to browse, extract, and manage local Wallpaper Engine Workshop projects.
 
-### 1. 路径配置
+![RePKG Workbench home screen](image/程序首页.png)
 
-首次使用需配置输入/输出路径：
+## Highlights
 
-1. 打开 **设置** 页面
-   
-3. 点击 **自动检测 Steam 路径**，程序将自动识别 Wallpaper Engine 的创意工坊目录和我的项目目录
-4. 也可手动填写路径
+- Finds Wallpaper Engine projects automatically or scans a directory you choose
+- Recognizes scene, video, web, and application projects
+- Displays metadata and static, animated GIF, or muted looping video previews
+- Searches and filters projects, with individual or batch selection
+- Extracts scene packages through the bundled RePKG command-line tool
+- Copies video, web, and application projects into a usable output structure
+- Shows live progress and detailed task logs, with cancellation support
+- Manages extracted projects in a separate output view
+- Supports English and Simplified Chinese (additional languages can be added by creating a JSON configuration in the `Languages` directory), light/dark themes, and custom backgrounds
+- Stores settings locally under `%LocalAppData%\RePKG-Workbench`
 
-| 路径 | 说明 | 典型位置 |
-|------|------|----------|
-| 输入路径 | Wallpaper Engine 创意工坊内容目录 | `Steam\steamapps\workshop\content\431960` |
-| 输出路径 | 提取后的项目输出位置 | `Steam\steamapps\common\wallpaper_engine\projects\myprojects` |
+## Download
 
-### 2. 扫描项目
+Choose one of the packages on the project Releases page:
 
-路径配置完成后，点击 **扫描** 按钮。程序将遍历输入目录，解析每个项目的 `project.json` 获取：
+- **`RePKG-Workbench-Setup-x64.exe`** — standard Windows installer. Requires the .NET 10 Desktop Runtime (x64); the installer can direct you to Microsoft if it is missing.
+- **`RePKG-Workbench-Portable-x64.zip`** — recommended portable package. It includes the required .NET runtime and works without a separate .NET installation.
+- **`RePKG-Workbench-Portable-FDD-x64.zip`** — smaller portable package for computers that already have the .NET 10 Desktop Runtime (x64).
 
-- 项目名称与描述
-- 类型（scene/video/web/application）
-- 预览图
-- 标签、版本号等信息
+All current packages target 64-bit Windows. If you are unsure which package to use, choose the self-contained **Portable** package.
 
-### 3. 提取项目
+## Quick start
 
-- **单个提取**：点击卡片上的提取按钮，或右键 → 提取
-- **批量提取**：勾选多个项目卡片，点击顶部操作栏的"提取选中"
-- **全选/取消**：点击操作栏的全选复选框
+1. Install the application, or extract the portable archive to a writable directory.
+2. Start `RePKG-Workbench.exe`.
+3. Set the **Input directory** to your Wallpaper Engine Workshop content folder. A common location is:
 
-提取时 scene 类型会调用 RePKG.exe 解包 `.pkg` 文件，其余类型直接复制。进度条和日志实时更新。
+   ```text
+   C:\Program Files (x86)\Steam\steamapps\workshop\content\431960
+   ```
 
-### 4. 输出目录管理
+   Use **Detect Steam paths** if Wallpaper Engine is installed in a detected Steam library.
+4. Set the **Output directory** to the folder where extracted projects should be created. The Wallpaper Engine **My Projects** directory is recommended; **Detect Steam paths** fills in this location automatically.
 
-切换到 **输出目录** 视图：
+   Save the settings after completing the configuration.
+5. Keep the bundled `RePKG.exe` detected by the application, or select another RePKG executable that you provide.
+6. Choose the extraction options you need and click **Scan / Refresh**.
+7. Select one or more projects, then click **Extract selected**.
 
-- 查看已提取的项目列表
-- 单个或批量删除已提取的项目
-- 支持搜索与类型筛选
+### 1. Scan and preview
 
-### 5. 搜索与筛选
+Project cards show the preview, title, type, size, and relevant paths. Use search and the type filter to narrow the list.
 
-输入目录和输出目录均支持：
+![Scanned Wallpaper Engine projects](image/扫描结果.png)
 
-- **关键词搜索**：输入项目名称实时过滤
-- **类型筛选**：按 scene / video / web / application 筛选
-- **组合使用**：搜索和筛选可同时生效
+### 2. Extract projects
 
-### 6. 外观设置
+Select the required cards and start extraction. The task log reports each operation and its result.
 
-在设置页面的 **外观设置** 中：
+> Other methods:
+>
+> - Right-click a project card to extract that project.
+> - Drag a complete project folder, or a folder containing multiple projects, into the application window. Extraction starts automatically after the folders are dropped.
 
-- 上传自定义背景图片（支持 PNG / JPG / GIF / WebP / BMP）
-- 从背景库中选择已有图片
-- 调整背景透明度和模糊度
-- 删除不需要的背景图片
+![Project extraction and task log](image/执行.png)
 
-### 7. 提取选项
+### 3. Manage output
 
-| 选项 | 说明 |
-|------|------|
-| 转换 TEX 纹理 | 将 `.tex` 文件转换为通用图片格式 |
-| 复制项目文件 | 将 `project.json` 等配置文件一并复制 |
-| 覆盖已有文件 | 提取时覆盖输出目录中已存在的同名文件 |
-| 递归搜索子目录 | 扫描时递归遍历所有子文件夹 |
-| 复制预览图像 | 将项目预览图复制到输出目录 |
+Switch to **Output projects** to review the extracted results. Deleting a project here permanently removes its output directory, so check the selection carefully.
 
-### 8.提取后的文件
+![Extracted project management](image/输出目录结果.png)
 
-若使用了Steam路径检测的结果作为输出路径，则打开WallpaperEngine，在筛选的来源中选择：“我的壁纸”，即可查看到转换后的项目。
+## Extraction options
 
-（通常一个壁纸是由多个图层和特效组合而成的，因此转换后的结果并不会是一个独立的图片PNG类或视频MP4类文件，当然，相关的结果都可以在项目文件夹内去查找）
+- **Scan subdirectories** — searches recursively for project folders containing `project.json`.
+- **Convert TEX textures** — converts supported Wallpaper Engine TEX textures while extracting scene projects.
+- **Copy project.json** — keeps the source project metadata in the output.
+- **Copy alternate preview images** — copies additional preview images when available.
+- **Overwrite existing output** — replaces files in an existing output project; leave this disabled if existing output must be preserved.
 
-转换后的项目是支持通过WallpaperEngine的“在编辑器中打开”进行相关的用户配置、图像、特效修改的。
+Scene projects are unpacked with RePKG. Video, web, and application projects are copied to the output directory rather than unpacked as scene packages. The default options are suitable for most users; refer to the RePKG project for details.
 
-## 项目结构
+## Requirements and troubleshooting
 
-```
-RePKG-GUI/
-├── app.py                        # Flask 应用入口
-├── config.json                   # 用户配置文件
-├── requirements.txt              # Python 依赖
-├── RePKG-GUI.spec                # PyInstaller 打包配置
-├── installer.iss                 # Inno Setup 6 安装脚本
-├── build.bat                     # 一键构建脚本
-├── backend/                      # 后端模块
-│   ├── __init__.py
-│   ├── api.py                    # API 路由处理（业务逻辑）
-│   ├── config.py                 # 配置读写管理
-│   ├── executor.py               # RePKG 执行器（提取任务线程）
-│   ├── paths.py                  # 路径工具（开发/打包环境统一）
-│   ├── scanner.py                # 文件扫描器（项目发现与解析）
-│   ├── server.py                 # 服务器启动（Flask + pywebview）
-│   └── steam.py                  # Steam 路径检测
-├── static/                       # 前端静态资源
-│   ├── assets/
-│   │   ├── RePKG.exe             # RePKG 解包工具
-│   │   └── images/
-│   │       ├── icon.ico          # 应用图标
-│   │       └── background/       # 背景图片库
-│   ├── css/
-│   │   └── custom.css            # 自定义样式
-│   └── js/
-│       └── app.js                # Alpine.js 前端逻辑
-└── templates/                    # HTML 模板
-    ├── base.html                 # 主页面（双视图面板）
-    ├── index.html                # 索引页
-    └── settings.html             # 设置页
-```
-## 致谢
+### Windows reports that .NET 10 Desktop Runtime is required
 
-- [RePKG](https://github.com/notscuffed/RePKG) — Wallpaper Engine `.pkg` 解包工具
+The installer and FDD portable package need the **.NET 10 Desktop Runtime (x64)**. This is different from the .NET Framework included with Windows. Install the x64 Desktop Runtime from Microsoft, or use `RePKG-Workbench-Portable-x64.zip`, which includes it.
 
+### No projects are found
 
-## 许可证
+- Confirm that the input directory contains project folders with a `project.json` file.
+- Enable **Scan subdirectories** when scanning the Workshop root.
+- Wallpaper Engine Workshop content normally uses Steam app ID `431960`.
+- Try **Detect Steam paths** if the Steam library is on another drive.
 
-[MIT License](LICENSE)
+### A scene project cannot be extracted
+
+- Confirm that the configured `RePKG.exe` exists and can be opened.
+- Check the expanded task log for the package name and RePKG error output.
+- Try extracting to a writable directory with sufficient free space.
+
+### No wallpaper image appears in the output directory
+
+Scene projects are often assembled from multiple assets using tools such as Spine, so **a separate, complete wallpaper image may not exist**. Open the project in the Wallpaper Engine editor through **My Wallpapers** to view it.
+
+![Open a project in the Wallpaper Engine editor](image/在编辑器中打开.png)

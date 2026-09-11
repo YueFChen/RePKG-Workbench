@@ -1,0 +1,83 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "\"${workspaceFolder}/RePKG-Workbench.sln\"",
+        "--configuration",
+        "Debug"
+      ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Program Files\\dotnet;${env:PATH}"
+        }
+      },
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build-app-debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "\"${workspaceFolder}/src/RePKG.App/RePKG.App.csproj\"",
+        "--configuration",
+        "Debug"
+      ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Program Files\\dotnet;${env:PATH}"
+        }
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test-debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "\"${workspaceFolder}/RePKG-Workbench.sln\"",
+        "--configuration",
+        "Debug",
+        "--no-restore"
+      ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Program Files\\dotnet;${env:PATH}"
+        }
+      },
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "publish-win-x64",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "publish",
+        "\"${workspaceFolder}/src/RePKG.App/RePKG.App.csproj\"",
+        "--configuration",
+        "Release",
+        "--runtime",
+        "win-x64",
+        "--self-contained",
+        "false"
+      ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Program Files\\dotnet;${env:PATH}"
+        }
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

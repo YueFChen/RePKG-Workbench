@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "RePKG Workbench (Debug)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/RePKG.App/bin/Debug/net10.0-windows/RePKG-Workbench.dll",
+      "cwd": "${workspaceFolder}/src/RePKG.App",
+      "preLaunchTask": "build-app-debug",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "justMyCode": true
+    }
+  ]
+}

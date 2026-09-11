@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>RePKG-Workbench</AssemblyName>
+    <AssemblyTitle>RePKG Workbench</AssemblyTitle>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <SatelliteResourceLanguages>en;zh-Hans</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RePKG.Core\RePKG.Core.csproj" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="WpfAnimatedGif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\LICENSE" Link="LICENSE" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\tools\RePKG.exe" Link="tools\RePKG.exe" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\tools\LICENSE-RePKG" Link="tools\LICENSE-RePKG" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\tools\SHA256SUMS" Link="tools\SHA256SUMS" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Resources\Languages\*.json" Link="Languages\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
